@@ -433,8 +433,8 @@
     max-width: 720px;
     margin: 0 auto;
     background: #ffffff;
-    min-height: 100vh;
-    padding: 34px 44px 64px 72px;
+    min-height: auto;
+    padding: 34px 44px 48px 72px;
     position: relative;
     background-image:
       repeating-linear-gradient(
@@ -554,12 +554,20 @@
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(31,42,55,0.10);
+    overflow: hidden;
   }
 
   .avatar-placeholder svg {
     width: 40px;
     height: 40px;
     opacity: 0.4;
+  }
+
+  .avatar-placeholder img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .profile-name {
@@ -950,10 +958,7 @@
         <div class="profile-card">
           <div class="pin"></div>
           <div class="avatar-placeholder">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="14" r="7" fill="#7b8794"/>
-              <ellipse cx="20" cy="30" rx="12" ry="7" fill="#7b8794"/>
-            </svg>
+            <img src="./anh.png" alt="Ảnh đại diện" loading="lazy" />
           </div>
           <div class="profile-name">Ban Tổ Chức<br/>Lớp 12/6</div>
         </div>
@@ -997,44 +1002,6 @@
           <div class="info-value">Sân trường THPT Võ Chí Công</div>
           <div class="info-sub">Đà Nẵng</div>
           <a class="map-btn" href="https://maps.app.goo.gl/reUvDnFq57hdr8jL6" target="_blank">Check Map 🗺</a>
-        </div>
-      </div>
-
-      <!-- Call -->
-      <div class="call-line" style="margin-top: 20px;">
-        <div class="call-dot"></div>
-        <span style="font-size: 12px; color: rgba(31,42,55,0.60); font-family: 'Be Vietnam Pro', Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-weight: 700; letter-spacing: 0.2px;">Liên hệ:</span>
-        <span style="font-family: 'Be Vietnam Pro', Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-size: 14px; color: rgba(31,42,55,0.86); font-weight: 700; letter-spacing: 0.2px;">0912 345 678</span>
-      </div>
-
-      <!-- Schedule -->
-      <div class="section-gap">
-        <div class="schedule-title">Timelines</div>
-
-        <div class="schedule-row">
-          <div class="schedule-dot"></div>
-          <div class="schedule-time">08:00</div>
-          <div class="schedule-event">Đón tiếp phụ huynh &amp; học sinh — Tập trung tại sân trường</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-dot"></div>
-          <div class="schedule-time">08:30</div>
-          <div class="schedule-event">Khai mạc chương trình &amp; phát biểu của thầy cô</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-dot"></div>
-          <div class="schedule-time">11:00</div>
-          <div class="schedule-event">Chụp ảnh kỷ yếu tập thể trong lớp</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-dot"></div>
-          <div class="schedule-time">11:00</div>
-          <div class="schedule-event">Chụp ảnh gia đình &amp; tự do giao lưu</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-dot"></div>
-          <div class="schedule-time">12:00</div>
-          <div class="schedule-event">Tiệc nhẹ &amp; chia sẻ kỷ niệm — Bế mạc chương trình</div>
         </div>
       </div>
 
