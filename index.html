@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thiệp mời kỷ yếu 12/6</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Inter:wght@400;600;700&family=Caveat:wght@400;600&family=Dancing+Script:wght@400;600;700&family=Patrick+Hand&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(1200px 800px at 20% 10%, #ffffff 0%, #f6f3ee 45%, #f0ece3 100%);
+    color: #1b1b1b;
+  }
+
+  #app {
+    min-height: 100vh;
+    width: 100%;
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vn-text{
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+
+  :root{
+    --ink: #1f2a37;
+    --muted: #6b7280;
+    --paper: #fbfaf7;
+    --paper-2: #f6f3ee;
+    --line: rgba(31,42,55,0.12);
+    --navy: #163a62;
+    --blue: #2b74c7;
+    --red: #d64b4b;
+    --shadow: 0 18px 50px rgba(17,24,39,0.10);
+    --shadow-2: 0 10px 22px rgba(17,24,39,0.10);
+    --radius: 16px;
+    --card: rgba(255,255,255,0.82);
+    --card-border: rgba(31,42,55,0.10);
+  }
+
+  /* ===== ENVELOPE SCREEN ===== */
+  #envelope-screen {
+    min-height: 100vh;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image:
+      radial-gradient(1200px 700px at 20% 10%, rgba(43,116,199,0.10) 0%, rgba(255,255,255,0) 60%),
+      radial-gradient(900px 600px at 85% 85%, rgba(214,75,75,0.10) 0%, rgba(255,255,255,0) 60%),
+      linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0));
+    padding: clamp(22px, 6vh, 64px) 16px;
+  }
+
+  .envelope-card {
+    background: transparent;
+    border-radius: 22px;
+    padding: 0;
+    width: min(560px, 92vw);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.18s ease, filter 0.18s ease;
+    border: none;
+    box-shadow: none;
+  }
+
+  .envelope-card:hover { transform: translateY(-2px) scale(1.01); }
+  .envelope-card:active { transform: translateY(0) scale(0.99); }
+  .envelope-card:focus-visible { outline: 3px solid rgba(43,116,199,0.55); outline-offset: 5px; }
+
+  button.envelope-card {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    border: none;
+    background: transparent;
+    display: block;
+  }
+
+  /* Cover concept: school postcard */
+  .cover {
+    position: relative;
+    border-radius: 22px;
+    padding: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.40));
+    border: 1px solid rgba(31,42,55,0.10);
+    box-shadow: 0 26px 70px rgba(17,24,39,0.14);
+    overflow: hidden;
+  }
+
+  .cover::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(700px 240px at 10% 10%, rgba(43,116,199,0.12), rgba(255,255,255,0) 60%),
+      radial-gradient(700px 240px at 90% 90%, rgba(214,75,75,0.10), rgba(255,255,255,0) 60%),
+      repeating-linear-gradient(90deg, rgba(31,42,55,0.04) 0 1px, transparent 1px 44px);
+    pointer-events:none;
+  }
+
+  .cover-card{
+    position: relative;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid rgba(31,42,55,0.10);
+    box-shadow: 0 16px 32px rgba(17,24,39,0.10);
+    padding: 22px 20px 18px;
+    overflow: hidden;
+  }
+
+  .cover-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(600px 240px at 20% 0%, rgba(22,58,98,0.08), rgba(255,255,255,0) 60%),
+      radial-gradient(600px 240px at 80% 100%, rgba(214,75,75,0.06), rgba(255,255,255,0) 60%);
+    pointer-events:none;
+  }
+
+  .cover-tape{
+    position:absolute;
+    top: -10px;
+    width: 84px;
+    height: 28px;
+    background: rgba(255, 241, 186, 0.82);
+    border: 1px solid rgba(120,96,0,0.18);
+    border-radius: 10px;
+    box-shadow: 0 10px 18px rgba(17,24,39,0.10);
+    transform: rotate(-7deg);
+    z-index: 4;
+    backdrop-filter: blur(6px);
+  }
+  .cover-tape.left{ left: 18px; }
+  .cover-tape.right{
+    right: 22px;
+    transform: rotate(9deg);
+    opacity: 0.92;
+  }
+
+  .cover-chip{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(43,116,199,0.10);
+    border: 1px solid rgba(43,116,199,0.18);
+    color: rgba(22,58,98,0.85);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .cover-title{
+    margin-top: 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--navy);
+    position: relative;
+    z-index: 3;
+  }
+
+  .cover-subtitle{
+    margin-top: 6px;
+    color: rgba(31,42,55,0.65);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.25px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .cover-meta{
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .cover-pill{
+    border-radius: 14px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(31,42,55,0.10);
+    text-align: left;
+  }
+
+  .cover-pill .k{
+    font-size: 10px;
+    letter-spacing: 2.2px;
+    color: rgba(31,42,55,0.45);
+    font-weight: 700;
+  }
+  .cover-pill .v{
+    margin-top: 4px;
+    font-size: 13px;
+    color: rgba(31,42,55,0.82);
+    font-weight: 700;
+  }
+
+  .cover-seal{
+    position:absolute;
+    right: 18px;
+    bottom: 18px;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, rgba(255,255,255,0.22), rgba(255,255,255,0) 55%),
+      radial-gradient(circle at 50% 55%, #c63f3f, #8f1f1f);
+    box-shadow: 0 16px 30px rgba(143,31,31,0.25);
+    border: 1px solid rgba(255,255,255,0.22);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: rgba(255,255,255,0.9);
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+    z-index: 5;
+    transform: rotate(-10deg);
+  }
+
+  .cover-hint{
+    margin-top: 14px;
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    color: rgba(31,42,55,0.55);
+    text-align:center;
+  }
+
+  /* Opening animation: lift + soften */
+  .envelope-card.is-opening{
+    filter: saturate(1.05);
+  }
+  .envelope-card.is-opening .cover{
+    animation: coverLift 540ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .envelope-card.is-opening .cover-seal{
+    animation: sealPop 540ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  @keyframes coverLift{
+    0%{ transform: translateY(0) rotate(0deg); opacity: 1; }
+    55%{ transform: translateY(-12px) rotate(-1.2deg); opacity: 1; }
+    100%{ transform: translateY(-10px) rotate(-1.2deg); opacity: 0.02; }
+  }
+  @keyframes sealPop{
+    0%{ transform: rotate(-10deg) scale(1); }
+    55%{ transform: rotate(-10deg) scale(1.06); }
+    100%{ transform: rotate(-10deg) scale(0.92); opacity: 0.1; }
+  }
+
+  /* Envelope (new) */
+  .env-shell{
+    position: relative;
+    border-radius: calc(var(--radius) + 10px);
+    padding: 26px 26px 22px;
+    background: linear-gradient(180deg, #f2ead8 0%, #e4d6b6 100%);
+    border: 1px solid rgba(90,64,32,0.18);
+    box-shadow: 0 26px 70px rgba(17,24,39,0.14);
+    overflow: hidden;
+  }
+
+  .env-shell::before{
+    content:"";
+    position:absolute;
+    inset: 0;
+    background:
+      radial-gradient(600px 240px at 20% 10%, rgba(255,255,255,0.55), rgba(255,255,255,0) 55%),
+      radial-gradient(700px 260px at 80% 90%, rgba(43,116,199,0.10), rgba(255,255,255,0) 60%);
+    pointer-events:none;
+  }
+
+  .env-letter{
+    position: relative;
+    border-radius: 16px;
+    padding: 22px 20px 20px;
+    text-align: center;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(90,64,32,0.18);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 14px 26px rgba(17,24,39,0.08);
+    z-index: 2;
+  }
+
+  .env-front{
+    position:absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 14px;
+    height: 44%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.0));
+    border-radius: 18px;
+    z-index: 4;
+    pointer-events:none;
+  }
+
+  .env-front::before,
+  .env-front::after{
+    content:"";
+    position:absolute;
+    inset: 0;
+    border-radius: 18px;
+  }
+
+  .env-front::before{
+    background:
+      linear-gradient(135deg, transparent 50%, rgba(90,64,32,0.14) 50%) left/50% 100% no-repeat,
+      linear-gradient(225deg, transparent 50%, rgba(90,64,32,0.14) 50%) right/50% 100% no-repeat;
+    opacity: 0.75;
+  }
+
+  .env-front::after{
+    border: 1px solid rgba(90,64,32,0.14);
+    background: rgba(255,255,255,0.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+  }
+
+  .env-flap{
+    position:absolute;
+    left: 18px;
+    right: 18px;
+    top: 14px;
+    height: 44%;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 5;
+    pointer-events:none;
+  }
+
+  .env-flap::before{
+    content:"";
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(90,64,32,0.12));
+    border: 1px solid rgba(90,64,32,0.14);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    box-shadow: 0 10px 20px rgba(17,24,39,0.08);
+  }
+
+  .envelope-card.is-opening .env-flap{
+    transform: rotateX(150deg);
+  }
+
+  .envelope-card.is-opening .env-letter{
+    animation: letterPop 520ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes letterPop{
+    0%{ transform: translateY(0); }
+    55%{ transform: translateY(-10px); }
+    100%{ transform: translateY(-6px); }
+  }
+
+  .envelope-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(90,64,32,0.72);
+    margin-bottom: 6px;
+    font-family: 'Patrick Hand', cursive;
+  }
+
+  .envelope-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 44px;
+    color: #3e2a12;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+  }
+
+  .envelope-to, .envelope-from {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 4px 0;
+    color: rgba(90,64,32,0.75);
+    font-family: 'Patrick Hand', cursive;
+  }
+
+  .envelope-to span, .envelope-from span {
+    font-weight: 700;
+    color: #2b1e0d;
+  }
+
+  .approved-stamp {
+    display: none;
+  }
+
+  .brad {
+    display: none;
+  }
+
+  .click-hint {
+    display: none;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+  /* ===== LETTER SCREEN ===== */
+  #letter-screen {
+    display: none;
+    min-height: 100vh;
+    background: transparent;
+    background-image: radial-gradient(900px 700px at 50% 0%, rgba(43,116,199,0.10) 0%, rgba(255,255,255,0) 55%);
+    padding: 18px 14px 60px;
+    position: relative;
+  }
+
+  .notebook {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #ffffff;
+    min-height: 100vh;
+    padding: 34px 44px 64px 72px;
+    position: relative;
+    background-image:
+      repeating-linear-gradient(
+        transparent,
+        transparent 32px,
+        rgba(22,58,98,0.05) 32px,
+        rgba(22,58,98,0.05) 33px
+      );
+    border-left: 4px solid rgba(214,75,75,0.85);
+    border-radius: 18px;
+    box-shadow: 0 26px 70px rgba(17,24,39,0.14);
+    border: 1px solid rgba(31,42,55,0.08);
+  }
+
+  .hole {
+    position: absolute;
+    left: -15px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #f5f3ef;
+    border: 1.5px solid #ccc;
+  }
+  .hole-1 { top: 18%; }
+  .hole-2 { top: 52%; }
+  .hole-3 { top: 82%; }
+
+  /* Title section */
+  .title-tag {
+    display: inline-block;
+    background: rgba(43,116,199,0.16);
+    padding: 5px 16px;
+    transform: rotate(-1deg);
+    margin-bottom: -8px;
+    margin-left: 10px;
+    border-radius: 999px;
+  }
+
+  .main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0;
+    letter-spacing: 0.2px;
+  }
+
+  .school-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    display: inline-block;
+    min-width: min(520px, 100%);
+    box-shadow: var(--shadow-2);
+    backdrop-filter: blur(6px);
+  }
+
+  .school-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(31,42,55,0.45);
+    margin-bottom: 4px;
+    font-family: 'Patrick Hand', cursive;
+  }
+
+  .school-name {
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 16px;
+    color: rgba(22,58,98,0.92);
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+
+  /* Profile + invite layout */
+  .hero-row{
+    display: flex;
+    align-items: stretch;
+    gap: 18px;
+    margin: 18px 0 4px;
+    flex-wrap: wrap;
+  }
+
+  .profile-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    padding: 18px 18px 16px;
+    width: 220px;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    box-shadow: var(--shadow-2);
+  }
+
+  .pin {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #ef6f6f;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    border: 1px solid #c06060;
+  }
+
+  .avatar-placeholder {
+    width: 86px;
+    height: 86px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(43,116,199,0.12), rgba(214,75,75,0.12));
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(31,42,55,0.10);
+  }
+
+  .avatar-placeholder svg {
+    width: 40px;
+    height: 40px;
+    opacity: 0.4;
+  }
+
+  .profile-name {
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .invite-section {
+    flex: 1;
+    min-width: 260px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    box-shadow: var(--shadow-2);
+    backdrop-filter: blur(6px);
+  }
+
+  .invites-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(31,42,55,0.45);
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 800;
+  }
+
+  .you-text {
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 32px;
+    color: rgba(17,24,39,0.92);
+    line-height: 1.12;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+  }
+
+  .you-underline {
+    width: 86px;
+    height: 5px;
+    background: linear-gradient(90deg, rgba(22,58,98,0.95), rgba(43,116,199,0.55), rgba(43,116,199,0.18));
+    border-radius: 999px;
+    margin: 8px 0 10px;
+  }
+
+  .join-text {
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 14px;
+    color: rgba(31,42,55,0.70);
+    line-height: 1.55;
+  }
+
+  .clearfix { display: none; }
+
+  /* Quote sticky */
+  .sticky-yellow {
+    background: linear-gradient(180deg, #fff4a6 0%, #ffe985 100%);
+    border: 1px solid rgba(120,96,0,0.18);
+    padding: 22px 22px;
+    margin: 20px 0;
+    position: relative;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 14px;
+    color: rgba(31,42,55,0.86);
+    line-height: 1.7;
+    text-align: center;
+    border-radius: 16px;
+    box-shadow: var(--shadow-2);
+  }
+
+  .sticky-yellow .quote-text{
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    line-height: 1.75;
+    color: rgba(31,42,55,0.86);
+  }
+
+  .pin-top {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #aaa;
+    border-radius: 50%;
+    border: 1px solid #888;
+  }
+
+  .quote-author {
+    font-size: 13px;
+    color: rgba(31,42,55,0.55);
+    margin-top: 8px;
+  }
+
+  /* Info sections */
+  .info-row {
+    display: flex;
+    gap: 30px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .info-block { flex: 1; min-width: 140px; }
+
+  .info-card{
+    background: rgba(255,255,255,0.80);
+    border: 1px solid rgba(31,42,55,0.08);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow-2);
+    backdrop-filter: blur(6px);
+  }
+
+  .info-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    font-family: 'Patrick Hand', cursive;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .info-section-title.red { color: var(--red); }
+
+  .info-value {
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 15px;
+    color: rgba(31,42,55,0.88);
+    font-weight: 600;
+  }
+
+  .info-sub {
+    font-size: 12px;
+    color: rgba(31,42,55,0.60);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+
+  .map-btn {
+    display: inline-block;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(31,42,55,0.12);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: rgba(31,42,55,0.75);
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    margin-top: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .map-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(17,24,39,0.10); }
+
+  /* Dress code */
+  .dress-pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.85);
+    border: 1.5px solid rgba(31,42,55,0.22);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: rgba(31,42,55,0.88);
+    margin: 4px 0;
+  }
+
+  .dress-note {
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 12px;
+    color: rgba(31,42,55,0.55);
+    font-style: normal;
+  }
+
+  /* Call */
+  .call-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px 0;
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 13px;
+    color: rgba(31,42,55,0.78);
+  }
+
+  .call-dot {
+    width: 16px;
+    height: 16px;
+    background: #44bb66;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Schedule */
+  .schedule-title {
+    background: rgba(43,116,199,0.10);
+    border: 1px solid rgba(43,116,199,0.16);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    color: rgba(22,58,98,0.92);
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .schedule-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 10px 0;
+    padding: 10px 10px;
+    border-bottom: 1px solid rgba(31,42,55,0.08);
+    border-radius: 12px;
+  }
+  .schedule-row:hover{ background: rgba(255,255,255,0.65); }
+
+  .schedule-time {
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 12px;
+    color: rgba(22,58,98,0.90);
+    min-width: 60px;
+    font-weight: 700;
+    padding-top: 2px;
+  }
+
+  .schedule-event {
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 13px;
+    color: rgba(31,42,55,0.86);
+    line-height: 1.5;
+  }
+
+  .schedule-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Divider line */
+  .divider {
+    width: 140px;
+    height: 2px;
+    background: rgba(43,116,199,0.65);
+    border-radius: 2px;
+    margin: 10px 0;
+  }
+
+  /* Footer */
+  .footer-note {
+    margin-top: 30px;
+    text-align: center;
+    font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 13px;
+    color: rgba(31,42,55,0.62);
+    font-weight: 600;
+    letter-spacing: 0.15px;
+  }
+
+  /* Transition */
+  .fade-in {
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .back-btn {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(31,42,55,0.12);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 13px;
+    color: rgba(31,42,55,0.70);
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 12px 22px rgba(17,24,39,0.12);
+  }
+
+  .back-btn:hover { background: white; }
+  .back-btn:focus-visible { outline: 3px solid rgba(43,116,199,0.45); outline-offset: 4px; }
+
+  .section-gap { margin-top: 28px; }
+
+  /* Responsive polish */
+  @media (max-width: 640px){
+    #envelope-screen{ padding: clamp(18px, 10vh, 72px) 14px; }
+    .cover{ padding: 14px; }
+    .cover-card{ padding: 18px 16px 14px; }
+    .cover-title{ font-size: 46px; }
+    .cover-meta{ grid-template-columns: 1fr; }
+    .cover-seal{ width: 62px; height: 62px; right: 14px; bottom: 14px; }
+    #letter-screen { padding: 14px 10px 50px; }
+    .notebook{
+      min-height: auto;
+      padding: 22px 16px 44px 18px;
+      border-radius: 16px;
+    }
+    .hole{ display:none; }
+    .main-title{ font-size: 52px; }
+    .school-card{ min-width: 100%; }
+    .profile-card{ width: 100%; }
+    .hero-row{ gap: 12px; }
+    .you-text{ font-size: 40px; }
+    .invite-section{ padding: 16px; }
+    .profile-card{ padding: 16px; }
+    .sticky-yellow{ padding: 16px; }
+    .sticky-yellow .quote-text{ font-size: 17px; }
+    .info-row{ gap: 18px; }
+    .back-btn{ top: 10px; right: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ENVELOPE SCREEN -->
+  <div id="envelope-screen">
+    <button class="envelope-card" id="open-btn" type="button" aria-controls="letter-screen" aria-expanded="false">
+      <div class="cover" aria-hidden="true">
+        <div class="cover-tape left"></div>
+        <div class="cover-tape right"></div>
+
+        <div class="cover-card">
+          <div class="cover-chip">THIỆP MỜI • KỶ YẾU</div>
+          <div class="cover-title">Lớp 12/6</div>
+          <div class="cover-subtitle">THPT Võ Chí Công</div>
+
+          <div class="cover-meta">
+            <div class="cover-pill">
+              <div class="k">KÍNH MỜI</div>
+              <div class="v">Quý Phụ Huynh</div>
+            </div>
+            <div class="cover-pill">
+              <div class="k">THỜI GIAN</div>
+              <div class="v">09:30 • 19/04/2026</div>
+            </div>
+          </div>
+
+          <div class="cover-seal">OPEN</div>
+          <div class="cover-hint">Chạm để mở thiệp</div>
+        </div>
+      </div>
+    </button>
+  </div>
+
+  <!-- LETTER SCREEN -->
+  <div id="letter-screen">
+    <button class="back-btn" id="close-btn" type="button">← Đóng</button>
+
+    <div class="notebook">
+      <!-- Holes -->
+      <div class="hole hole-1"></div>
+      <div class="hole hole-2"></div>
+      <div class="hole hole-3"></div>
+
+      <!-- Header -->
+      <div style="margin-bottom: 4px;">
+        <div class="title-tag"></div>
+        <div class="main-title">Kỷ Yếu</div>
+      </div>
+
+      <div class="school-card">
+        <div class="school-label">SCHOOL &amp; CLASS</div>
+        <div class="school-name">THPT Võ Chí Công &bull; Lớp 12/6</div>
+      </div>
+
+      <!-- Profile + invite -->
+      <div class="hero-row">
+        <div class="profile-card">
+          <div class="pin"></div>
+          <div class="avatar-placeholder">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="14" r="7" fill="#7b8794"/>
+              <ellipse cx="20" cy="30" rx="12" ry="7" fill="#7b8794"/>
+            </svg>
+          </div>
+          <div class="profile-name">Ban Tổ Chức<br/>Lớp 12/6</div>
+        </div>
+
+        <div class="invite-section">
+          <div class="invites-label">KÍNH MỜI</div>
+          <div class="you-text">Quý Phụ Huynh</div>
+          <div class="you-underline"></div>
+          <div class="join-text">Dành một chút ít thời gian để đến tham dữ buổi kỉ yếu của lớp 12/6!</div>
+        </div>
+      </div>
+
+      <!-- Quote sticky -->
+      <div class="sticky-yellow">
+        <div class="pin-top"></div>
+        <div class="quote-text">
+          <span class="vn-text">"Thanh xuân như một cơn mưa rào.<br/>
+          Hãy cùng mình lưu giữ lại những khoảnh khắc<br/>
+          rực rỡ nhất của tuổi học trò trước khi<br/>
+          chúng ta mỗi người một ngả."</span>
+        </div>
+        <div class="quote-author">— Ban Tổ Chức Lớp 12/6 —</div>
+      </div>
+
+      <!-- Date + Location -->
+      <div class="info-row section-gap">
+        <div class="info-block info-card">
+          <div class="info-section-title">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="#4488cc"><rect x="1" y="3" width="14" height="12" rx="2" fill="none" stroke="#4488cc" stroke-width="1.5"/><path d="M5 1v4M11 1v4M1 7h14" stroke="#4488cc" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Save the Date
+          </div>
+          <div class="info-value">Chủ Nhật, 19/05/2026</div>
+          <div class="info-sub">09:30 sáng</div>
+          <div class="divider"></div>
+        </div>
+        <div class="info-block info-card">
+          <div class="info-section-title red">
+            <svg width="10" height="14" viewBox="0 0 10 14" fill="#cc3333"><circle cx="5" cy="5" r="3" fill="white" stroke="#cc3333" stroke-width="1.5"/><path d="M5 1C2.79 1 1 2.79 1 5c0 3.5 4 8 4 8s4-4.5 4-8c0-2.21-1.79-4-4-4z" fill="#cc3333" opacity="0.8"/></svg>
+            The Spot
+          </div>
+          <div class="info-value">Sân trường THPT Võ Chí Công</div>
+          <div class="info-sub">Đà Nẵng</div>
+          <a class="map-btn" href="https://maps.app.goo.gl/reUvDnFq57hdr8jL6" target="_blank">Check Map 🗺</a>
+        </div>
+      </div>
+
+      <!-- Call -->
+      <div class="call-line" style="margin-top: 20px;">
+        <div class="call-dot"></div>
+        <span style="font-size: 12px; color: rgba(31,42,55,0.60); font-family: 'Be Vietnam Pro', Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-weight: 700; letter-spacing: 0.2px;">Liên hệ:</span>
+        <span style="font-family: 'Be Vietnam Pro', Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-size: 14px; color: rgba(31,42,55,0.86); font-weight: 700; letter-spacing: 0.2px;">0912 345 678</span>
+      </div>
+
+      <!-- Schedule -->
+      <div class="section-gap">
+        <div class="schedule-title">Timelines</div>
+
+        <div class="schedule-row">
+          <div class="schedule-dot"></div>
+          <div class="schedule-time">08:00</div>
+          <div class="schedule-event">Đón tiếp phụ huynh &amp; học sinh — Tập trung tại sân trường</div>
+        </div>
+        <div class="schedule-row">
+          <div class="schedule-dot"></div>
+          <div class="schedule-time">08:30</div>
+          <div class="schedule-event">Khai mạc chương trình &amp; phát biểu của thầy cô</div>
+        </div>
+        <div class="schedule-row">
+          <div class="schedule-dot"></div>
+          <div class="schedule-time">11:00</div>
+          <div class="schedule-event">Chụp ảnh kỷ yếu tập thể trong lớp</div>
+        </div>
+        <div class="schedule-row">
+          <div class="schedule-dot"></div>
+          <div class="schedule-time">11:00</div>
+          <div class="schedule-event">Chụp ảnh gia đình &amp; tự do giao lưu</div>
+        </div>
+        <div class="schedule-row">
+          <div class="schedule-dot"></div>
+          <div class="schedule-time">12:00</div>
+          <div class="schedule-event">Tiệc nhẹ &amp; chia sẻ kỷ niệm — Bế mạc chương trình</div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <!-- Rất mong Quý Phụ Huynh sẽ giành một chút ít thời gian đến tham dự buổi kỉ yếu ạ!<br/> -->
+        <span style="font-size: 12px; color: rgba(31,42,55,0.40); font-weight: 600;">— Lớp 12/6, THPT Võ Chí Công —</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    function getEls() {
+      return {
+        env: document.getElementById('envelope-screen'),
+        letter: document.getElementById('letter-screen'),
+        openBtn: document.getElementById('open-btn'),
+        closeBtn: document.getElementById('close-btn'),
+      };
+    }
+
+    function doOpenLetter() {
+      var els = getEls();
+      if (!els.env || !els.letter) return;
+      els.env.style.display = 'none';
+      els.letter.style.display = 'block';
+      els.letter.classList.remove('fade-in');
+      // force reflow for animation restart
+      void els.letter.offsetWidth;
+      els.letter.classList.add('fade-in');
+      if (els.openBtn) els.openBtn.setAttribute('aria-expanded', 'true');
+      if (els.closeBtn) els.closeBtn.focus();
+    }
+
+    function openLetter() {
+      var els = getEls();
+      if (!els.openBtn) return doOpenLetter();
+      if (els.openBtn.classList.contains('is-opening')) return;
+      els.openBtn.classList.add('is-opening');
+      els.openBtn.disabled = true;
+      window.setTimeout(function () {
+        doOpenLetter();
+      }, 540);
+    }
+
+    function closeLetter() {
+      var els = getEls();
+      if (!els.env || !els.letter) return;
+      els.letter.style.display = 'none';
+      els.env.style.display = 'flex';
+      if (els.openBtn) {
+        els.openBtn.setAttribute('aria-expanded', 'false');
+        els.openBtn.classList.remove('is-opening');
+        els.openBtn.disabled = false;
+        els.openBtn.focus();
+      }
+    }
+
+    // expose for compatibility (in case some environment still calls global funcs)
+    window.openLetter = openLetter;
+    window.closeLetter = closeLetter;
+
+    function bind() {
+      var els = getEls();
+      if (els.openBtn) els.openBtn.addEventListener('click', openLetter);
+      if (els.closeBtn) els.closeBtn.addEventListener('click', closeLetter);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLetter();
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bind);
+    } else {
+      bind();
+    }
+  })();
+</script>
+
+</body>
+</html>
